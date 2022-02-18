@@ -1,0 +1,7 @@
+param_file_path="/home/emelnick/axionCAMB-master/inifiles/params.ini "
+axion_camb_path="/sum1 = 0
+sum2 = 0/axionCAMB-master/camb"
+
+cosmo_database="/Users/dgrin/Desktop/axion_kSZ_source/CAMB_outputs/cosmo_db_final.dat"
+
+camb_outputs_path="/Users/dgrin/Desktop/axion_kSZ_source/CAMB_outputs/final_out/"

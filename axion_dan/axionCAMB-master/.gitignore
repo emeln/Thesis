@@ -1,0 +1,8 @@
+.DS_Store
+._*
+*.o
+*~
+*.mod
+camb
+*.i90
+*.ini
