@@ -50,7 +50,22 @@ class BubbleMassFunction(MassFunction):
         m_p = 1.672619e-27  #  kg
         G = 6.67408e-11 #  m^3 kg^-1 s^-2
         kb = 1.380649e-23 #  J K^-1
+        delta = 178
+        Omega_m = 0.315 # Not sure if this is the right one from Planck. This is in the abstract, but they have other Omega_m values
+        # cosmo.RHO_C is the number given times h^2; should I account for that h^2 or leave it there?
+        # I don't see an Omega_m in cosmology.py, so I've made my own, sourced from Planck 2018.
+        # Actually there is the OmegaM property in cosmo, so could use that, although idk what sort of value it returns yet.
 
-        mMin = 1.38e6 * (kb / (G * m_p))**(3/2) * (overdensity(z))**(-1/2)
+        T = 1e4 # virial temp in K that Furlanetto associates with minimum mass of ionizing source
+        # mMin = (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) * ((delta * self.cosmo.RHO_C*1000 * Omega_m * (1/self.cosmo.h)**2)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Everything computed here using Omega_m
+        # mMin = (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Everything computed here using Omega_m
+        # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * Omega_m * (1/self.cosmo.h)**2)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Pre-evaluated (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) in Mathematica
+        # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluated w/ cosmology.py OmegaM property
+        mMin = (2.61739e20) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property
+        mMin = 1.91916e33 * (self.cosmo.OmegaM)**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but cosmology.py OmegaM property
+        # mMin = 1.91916e33 * Omega_m**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but Omega_m
+
+
+        B0 = 
         B = self.cosmo.delta_crit - np.sqrt(2) * erfinv(1 - 1/zeta) * ()
-        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(dlosSigma_dlogm(m, z)) * (B0 / self.sigmaInt(m, z)) * np.exp(-B**2 / (2 * (self.sigmaInt(m, z))**2))
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / self.sigmaInt(m, z)) * np.exp(-B**2 / (2 * (self.sigmaInt(m, z))**2))
