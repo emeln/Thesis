@@ -37,6 +37,12 @@ class JenkinsMassFunction(MassFunction):
         vals = self.cosmo.rho_mean / m * f * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z))
         return vals
 
+class EliMassFunction(MassFunction):
+    def __call__(self, m, z):
+        #output is dN/d log m
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean * self.cosmo.delta_crit / self.sigmaInt(m, z) / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * np.exp(-self.cosmo.delta_crit**2 / (2 * self.sigmaInt(m, z)**2))
+        return vals
+
 class BubbleMassFunction(MassFunction):
     def __call__(self, m, z, zeta=40):
         # Output is m dn/dm
@@ -63,5 +69,5 @@ class BubbleMassFunction(MassFunction):
         K = erfinv(1 - 1/zeta)
         B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
         B = B0 + K/(np.sqrt(2) * sigma_min)
-        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma * np.exp(-B**2 / (2 * sigma**2))
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
         return vals
