@@ -60,14 +60,23 @@ class BubbleMassFunction(MassFunction):
         # mMin = (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Everything computed here using Omega_m
         # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * Omega_m * (1/self.cosmo.h)**2)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Pre-evaluated (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) in Mathematica
         # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluated w/ cosmology.py OmegaM property
-        mMin = (2.61739e20) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property
         # mMin = 1.91916e33 * (self.cosmo.OmegaM)**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but cosmology.py OmegaM property
         # mMin = 1.91916e33 * Omega_m**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but Omega_m
 
+        # mMin = (2.61739e20) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property
+        # mMin = mMin/(2e30) # mMin in solar masses
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
+        print("mMin =",mMin)
         sigma = self.sigmaInt(m,z)
         sigma_min = self.sigmaInt(mMin,z)
+        print("sigma =",sigma)
+        print("sigma_min =",sigma_min)
         K = erfinv(1 - 1/zeta)
         B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
-        B = B0 + K/(np.sqrt(2) * sigma_min)
+        print("K =",K)
+        print("B0 =",B0) #*self.sigmaInt(0.01,z)/self.sigmaInt(.01,0))
+        B = B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
+        print("B =",B)
+        print(np.exp(-B**2 / (2 * sigma**2)))
         vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
         return vals
