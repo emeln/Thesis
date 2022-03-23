@@ -73,10 +73,18 @@ class BubbleMassFunction(MassFunction):
         print("sigma_min =",sigma_min)
         K = erfinv(1 - 1/zeta)
         B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
-        print("K =",K)
-        print("B0 =",B0) #*self.sigmaInt(0.01,z)/self.sigmaInt(.01,0))
+
+        # print("K =",K)
+        print("B0 =",B0*sigma/self.sigmaInt(m,z))
         B = B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
-        print("B =",B)
-        print(np.exp(-B**2 / (2 * sigma**2)))
+        B0 = self.cosmo.delta_crit
+        B = self.cosmo.delta_crit
+
+        # print("B =",B)
+        # print(np.exp(-B**2 / (2 * sigma**2)))
+        # print(sigma)
+        # print(self.cosmo.rho_mean/m)
+        # print(np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)))
+        # print(B0 / sigma)
         vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
         return vals
