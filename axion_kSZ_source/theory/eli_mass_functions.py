@@ -1,4 +1,5 @@
 from .sigma_interpolation import SigmaInterpolator
+from .sigma_interpolation_FFTLog import SigmaInterpolatorFFTLog
 from .cosmology import Cosmology
 from scipy.special import erfinv
 
@@ -16,7 +17,7 @@ class MassFunction(object):
     def __init__(self, cosmo, sigmaInterpolator):
         """
 
-                :type sigmaInterpolator: SigmaInterpolator
+                :type sigmaInterpolator: SigmaInterpolatorFFTLog
                 :type cosmo: Cosmology
                 """
         self.cosmo = cosmo
@@ -46,45 +47,33 @@ class EliMassFunction(MassFunction):
 class BubbleMassFunction(MassFunction):
     def __call__(self, m, z, zeta=40):
         # Output is m dn/dm
-        m_p = 1.672619e-27  #  kg
-        G = 6.67408e-11 #  m^3 kg^-1 s^-2
-        kb = 1.380649e-23 #  J K^-1
-        delta = 178
-        Omega_m = 0.315 # Not sure if this is the right one from Planck. This is in the abstract, but they have other Omega_m values
-        # cosmo.RHO_C is the number given times h^2; should I account for that h^2 or leave it there?
-        # I don't see an Omega_m in cosmology.py, so I've made my own, sourced from Planck 2018.
-        # Actually there is the OmegaM property in cosmo, so could use that, although idk what sort of value it returns yet.
 
-        T = 1e4 # virial temp in K that Furlanetto associates with minimum mass of ionizing source
-        # mMin = (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) * ((delta * self.cosmo.RHO_C*1000 * Omega_m * (1/self.cosmo.h)**2)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Everything computed here using Omega_m
-        # mMin = (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Everything computed here using Omega_m
-        # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * Omega_m * (1/self.cosmo.h)**2)**(-1/2)) * ((1+z)**(-3/2)) * (T**(3/2)) # Pre-evaluated (9/(2*np.sqrt(pi))) * ((kb/(G*m_p))**(3/2)) in Mathematica
-        # mMin = (3.49203e21) * ((delta * self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluated w/ cosmology.py OmegaM property
-        # mMin = 1.91916e33 * (self.cosmo.OmegaM)**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but cosmology.py OmegaM property
-        # mMin = 1.91916e33 * Omega_m**(-1/2) * ((1+z)**(-3/2)) * T**(3/2) # Pre-evaluate everything but Omega_m
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
 
-        # mMin = (2.61739e20) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property
-        # mMin = mMin/(2e30) # mMin in solar masses
-        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * T**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
-        print("mMin =",mMin)
-        sigma = self.sigmaInt(m,z)
         sigma_min = self.sigmaInt(mMin,z)
-        print("sigma =",sigma)
-        print("sigma_min =",sigma_min)
-        K = erfinv(1 - 1/zeta)
+        sigma = self.sigmaInt(m,z)
+        K = erfinv(1-1/zeta)
         B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
+        B = B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
 
         # print("K =",K)
-        print("B0 =",B0*sigma/self.sigmaInt(m,z))
-        B = B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
-        B0 = self.cosmo.delta_crit
-        B = self.cosmo.delta_crit
+        # print('sigma_min =',sigma_min)
+        # print("C0 =",B0)
+        # print("B0 =",B0*self.sigmaInt(m,0)/sigma)
 
-        # print("B =",B)
-        # print(np.exp(-B**2 / (2 * sigma**2)))
-        # print(sigma)
-        # print(self.cosmo.rho_mean/m)
-        # print(np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)))
-        # print(B0 / sigma)
         vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
         return vals
+
+    def B(self, m, z, zeta=40):
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
+        sigma_min = self.sigmaInt(mMin,z)
+        sigma = self.sigmaInt(m,z)
+        K = erfinv(1-1/zeta)
+        B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
+        return B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
+
+    def B0(self, z, zeta=40):
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
+        sigma_min = self.sigmaInt(mMin,z)
+        K = erfinv(1-1/zeta)
+        return self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min

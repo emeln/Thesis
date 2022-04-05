@@ -1,26 +1,26 @@
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -225,38 +225,38 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 51.03s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 56.70s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -461,38 +461,38 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 55.15s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 11.65s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -697,38 +697,38 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 50.77s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 13.98s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -933,38 +933,38 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 53.73s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 20.76s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -1169,38 +1169,38 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 55.30s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
-h=0.7200, omega_cdm=0.1138, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0060
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 22.57s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.0599, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-26, omega_axion=0.0599
 (w0, wa) = (-1.00000,  0.00000)
 Om_b h^2             =  0.022330
-Om_c h^2             =  0.113810
+Om_c h^2             =  0.059900
 Om_nu h^2            =  0.000000
 Om_Lambda            =  0.725749
 H0                  = 72.000000
-Om_ax h^2            =  0.005990
+Om_ax h^2            =  0.059900
 a_osc               =  0.57E-04
 ma/eV            =  0.10E-25
-Om_K                 = -0.000000
+Om_K                 =  0.000000
 Om_m (1-Om_K-Om_L)   =  0.274251
-100 theta (CosmoMC)  =  1.053483
+100 theta (CosmoMC)  =  1.054334
 Reion opt depth      =  0.0000
 Age of universe/GYr  =  13.419
 zstar                =  1089.92
-r_s(zstar)/Mpc       =  144.58
-100*theta            =  1.053581
+r_s(zstar)/Mpc       =  144.70
+100*theta            =  1.054435
 zdrag                =  1059.86
-r_s(zdrag)/Mpc       =  147.25
+r_s(zdrag)/Mpc       =  147.37
 k_D(zstar) Mpc       =  0.1409
-100*theta_D          =  0.162446
-tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
+100*theta_D          =  0.162445
+tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.8
  Computing mode evolution...
  k=   5.0000000000000002E-005
  k=   6.9780621254304483E-005
@@ -1405,12 +1405,12 @@ tau_recomb/Mpc       =  281.07  tau_now/Mpc =  14003.6
  k=   58.412815646630079     
  k=   72.948778755497685     
  Done computing mode evolution!
- at z =    0.00000000      sigma8 (all matter)=  0.777261138    
-CAMB took 55.78s to compute
-File test_axion_params.ini successfully moved!
-File test_axion_evolution.dat successfully moved!
-File test_axion_devolution.dat successfully moved!
-File test_axion_a_vals.dat successfully moved!
-File test_axion_matterpower_out.dat successfully moved!
-File test_axion_transfer_out.dat successfully moved!
-File test_axion_scalCls.dat could not be moved. It does not exist.
+ at z =    0.00000000      sigma8 (all matter)=  0.471022844    
+CAMB took 13.32s to compute
+File test_cosmo2_params.ini successfully moved!
+File test_cosmo2_evolution.dat successfully moved!
+File test_cosmo2_devolution.dat successfully moved!
+File test_cosmo2_a_vals.dat successfully moved!
+File test_cosmo2_matterpower_out.dat successfully moved!
+File test_cosmo2_transfer_out.dat successfully moved!
+File test_cosmo2_scalCls.dat could not be moved. It does not exist.
