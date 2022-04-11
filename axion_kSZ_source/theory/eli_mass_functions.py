@@ -47,14 +47,15 @@ class EliMassFunction(MassFunction):
 class BubbleMassFunction(MassFunction):
     def __call__(self, m, z, zeta=40):
         # Output is m dn/dm
-
-        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
+        T = 1e4
+        # mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
+        mMin = (1e8/self.cosmo.h) * (10/(1+z) * T/(4e4))**(3/2)
 
         sigma_min = self.sigmaInt(mMin,z)
         sigma = self.sigmaInt(m,z)
-        K = erfinv(1-1/zeta)
+        K = erfinv(1 - 1/zeta)
         B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
-        B = B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
+        B = B0 + K/(np.sqrt(2)*sigma_min) * sigma**2
 
         # print("K =",K)
         # print('sigma_min =',sigma_min)
