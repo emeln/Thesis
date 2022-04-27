@@ -46,10 +46,9 @@ class EliMassFunction(MassFunction):
 
 class BubbleMassFunction(MassFunction):
     def __call__(self, m, z, zeta=40):
-        # Output is m dn/dm
+        # Output is m dn/dm = dn/dlogm
         T = 1e4
-        # mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
-        mMin = (1e8/self.cosmo.h) * (10/(1+z) * T/(4e4))**(3/2)
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2)
 
         sigma_min = self.sigmaInt(mMin,z)
         sigma = self.sigmaInt(m,z)
@@ -65,16 +64,24 @@ class BubbleMassFunction(MassFunction):
         vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
         return vals
 
-    def B(self, m, z, zeta=40):
-        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
-        sigma_min = self.sigmaInt(mMin,z)
-        sigma = self.sigmaInt(m,z)
-        K = erfinv(1-1/zeta)
-        B0 = self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
-        return B0 + K/(np.sqrt(2) * sigma_min) * sigma**2
+class BMF2(MassFunction):
+    def __call__(self, m, z, zeta=40):
+        # Output is m dn/dm = dn/dlogm
+        T = 1e4
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2)
 
-    def B0(self, z, zeta=40):
-        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(3/2)) * (1e4)**(3/2) # Included Delta in pre-eval w/ cosmology.py OmegaM property and in solar masses
-        sigma_min = self.sigmaInt(mMin,z)
-        K = erfinv(1-1/zeta)
-        return self.cosmo.delta_crit - np.sqrt(2) * K * sigma_min
+        sigma_min = self.sigmaInt(mMin,0)
+        sigma = self.sigmaInt(m,0)
+        delta_c = self.cosmo.delta_crit * sigma / self.sigmaInt(m,z)
+
+        K = erfinv(1 - 1/zeta)
+        B0 = delta_c - np.sqrt(2) * K * sigma_min
+        B = B0 + K/(np.sqrt(2)*sigma_min) * sigma**2
+
+        # print("K =",K)
+        # print('sigma_min =',sigma_min)
+        # print("C0 =",B0)
+        # print("B0 =",B0*self.sigmaInt(m,0)/sigma)
+
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (B0 / sigma) * np.exp(-B**2 / (2 * sigma**2))
+        return vals
