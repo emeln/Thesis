@@ -115,3 +115,7 @@ class SigmaInterpolatorFFTLog(object):
 
     def dlogSigma_dlogm(self, m, z):
         return self.dsigma_dm(m, z)*m/self(m,z)
+
+    @property
+    def window_function(self):
+        return self.__window_function
