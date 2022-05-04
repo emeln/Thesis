@@ -1,0 +1,17 @@
+h=0.7200, omega_cdm=0.1078, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-22, omega_axion=0.0120
+File test_$m_a = 10^{-30}$_params.ini could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_evolution.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_devolution.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_a_vals.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_matterpower_out.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_transfer_out.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_scalCls.dat could not be moved. It does not exist.
+h=0.7200, omega_cdm=0.1078, omega_b=0.0223, n_s=0.9652, tau=0.0540, log_1e10A_s=3.043000, m_axion=1.000E-30, omega_axion=0.0120
+CAMB took 40.79s to compute
+File test_$m_a = 10^{-30}$_params.ini could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_evolution.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_devolution.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_a_vals.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_matterpower_out.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_transfer_out.dat could not be moved. It does not exist.
+File test_$m_a = 10^{-30}$_scalCls.dat could not be moved. It does not exist.
