@@ -96,7 +96,7 @@ class CosmoDictionary:
         for key in self.__cosmo_dict:
             c_pkl.append(self.__cosmo_dict[key])
 
-        c_pkl.append([self.__z_vals_sigma,self.__window,self.__int_helper,self.__kmin,self.__kmax])
+        c_pkl.append([self.__z_vals_sigma,self.__window,self.__int_helper,self.__kmin,self.__kmax,self.__Nr])
 
         with open('newpickle.pkl','wb') as picklefile:
             try:
@@ -129,6 +129,7 @@ class CosmoDictionary:
         self.__int_helper = c_pkl[-1][2]
         self.__kmin = c_pkl[-1][3]
         self.__kmax = c_pkl[-1][4]
+        self.__Nr = c_pkl[-1][5]
 
     def reset_cosmo(self):
         self.__cosmos = []
