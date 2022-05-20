@@ -1,4 +1,5 @@
 from .sigma_interpolation import SigmaInterpolator
+from .sigma_interpolation_FFTLog import SigmaInterpolatorFFTLog
 from .cosmology import Cosmology
 from scipy.special import erfinv
 
@@ -16,7 +17,7 @@ class MassFunction(object):
     def __init__(self, cosmo, sigmaInterpolator):
         """
 
-                :type sigmaInterpolator: SigmaInterpolator
+                :type sigmaInterpolator: SigmaInterpolatorFFTLog
                 :type cosmo: Cosmology
                 """
         self.cosmo = cosmo
@@ -39,18 +40,59 @@ class JenkinsMassFunction(MassFunction):
 
 class EliMassFunction(MassFunction):
     def __call__(self, m, z):
-        # Output is dN/dlogm
-        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean * self.cosmo.delta_crit / self.sigmaInt(m,z) / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * np.exp(-self.cosmo.delta_crit**2 / (2 * self.sigmaInt(m, z)**2))
+        #output is dN/d log m
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean * self.cosmo.delta_crit / self.sigmaInt(m, z) / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * np.exp(-self.cosmo.delta_crit**2 / (2 * self.sigmaInt(m, z)**2))
         return vals
 
 class BubbleMassFunction(MassFunction):
     def __call__(self, m, z, zeta=40):
-        # Output is m dn/dm
+        # Output is m dn/dm = dn/dlogm
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2)
 
-        m_p = 1.672619e-27  #  kg
-        G = 6.67408e-11 #  m^3 kg^-1 s^-2
-        kb = 1.380649e-23 #  J K^-1
+        # sigma_min = self.sigmaInt(mMin,z)
+        # sigma = self.sigmaInt(m,z)
+        sigma_min = self.sigmaInt(mMin,z)
+        sigma = self.sigmaInt(m,z)
 
-        mMin = 1.38e6 * (kb / (G * m_p))**(3/2) * (overdensity(z))**(-1/2)
-        B = self.cosmo.delta_crit - np.sqrt(2) * erfinv(1 - 1/zeta) * ()
-        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(dlosSigma_dlogm(m, z)) * (B0 / self.sigmaInt(m, z)) * np.exp(-B**2 / (2 * (self.sigmaInt(m, z))**2))
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (self.B0(z,zeta) / sigma) * np.exp(-self.B(m,z,zeta)**2 / (2 * sigma**2))
+        return vals
+
+    def B(self, m, z, zeta=40):
+        return self.B0(z, zeta) + self.B1(z, zeta) * self.sigmaInt(m,z)**2
+
+    def B0(self, z, zeta=40):
+        K = erfinv(1 - 1/zeta)
+        return self.cosmo.delta_crit - np.sqrt(2) * K * self.sigma_min(z)
+
+    def B1(self, z, zeta=40):
+        K = erfinv(1 - 1/zeta)
+        return K/(np.sqrt(2)*self.sigma_min(z))
+
+
+    def sigma_min(self,z):
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2)
+        return self.sigmaInt(mMin,z)
+
+class BMF2(MassFunction):
+    def __call__(self, m, z, zeta=40):
+        # Output is m dn/dm = dn/dlogm
+        sigma = self.sigmaInt(m,0)
+        vals = np.sqrt(2 / np.pi) * (self.cosmo.rho_mean / m) * np.fabs(self.sigmaInt.dlogSigma_dlogm(m, z)) * (self.B0(z, zeta) / sigma) * np.exp(-self.B(m,z,zeta)**2 / (2 * sigma**2))
+        return vals
+
+    def B(self, m, z, zeta=40):
+        return self.B0(z,zeta) + self.B1(zeta)*self.sigmaInt(m,0)**2
+
+    def B0(self, z, zeta=40):
+        m = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * (1e4)**(3/2)
+        delta_c = self.cosmo.delta_crit * self.sigmaInt(m,0) / self.sigmaInt(m,z)
+        K = erfinv(1 - 1/zeta)
+        return delta_c - np.sqrt(2) * K * self.sigma_min(0)
+
+    def B1(self, zeta=40):
+        K = erfinv(1 - 1/zeta)
+        return K/(np.sqrt(2)*self.sigma_min(0))
+
+    def sigma_min(self,z):
+        mMin = (1.308695e-10) * ((self.cosmo.RHO_C*1000 * self.cosmo.OmegaM)**(-1/2)) * ((1+z)**(-3/2)) * (1e4)**(3/2)
+        return self.sigmaInt(mMin,z)
